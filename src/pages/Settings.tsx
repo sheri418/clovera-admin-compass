@@ -8,9 +8,12 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const Settings = () => {
   const { admin } = useAuth();
+  const { theme, setTheme } = useTheme();
   
   return (
     <DashboardLayout>
@@ -144,14 +147,26 @@ const Settings = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Dark Mode</p>
-                      <p className="text-sm text-muted-foreground">
-                        Enable dark mode for the dashboard.
-                      </p>
-                    </div>
-                    <Switch />
+                  <div>
+                    <h3 className="text-lg font-medium mb-2">Theme</h3>
+                    <RadioGroup 
+                      value={theme}
+                      onValueChange={(value) => setTheme(value as "light" | "dark" | "system")}
+                      className="flex flex-col space-y-3"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="light" id="light-theme" />
+                        <Label htmlFor="light-theme" className="cursor-pointer">Light</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="dark" id="dark-theme" />
+                        <Label htmlFor="dark-theme" className="cursor-pointer">Dark</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="system" id="system-theme" />
+                        <Label htmlFor="system-theme" className="cursor-pointer">System</Label>
+                      </div>
+                    </RadioGroup>
                   </div>
                   
                   <div className="flex items-center justify-between">

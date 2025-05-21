@@ -25,6 +25,7 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -73,7 +74,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <aside 
         className={cn(
@@ -141,11 +142,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       {/* Main Content */}
       <div className="flex flex-col flex-1 w-0 overflow-hidden">
         {/* Top Navigation */}
-        <header className="z-10 py-4 bg-white shadow-sm">
+        <header className="z-10 py-4 bg-card shadow-sm">
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8">
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-500"
+              className="lg:hidden p-2 rounded-md text-muted-foreground"
               onClick={() => setSidebarOpen(true)}
             >
               <Menu className="h-6 w-6" />
@@ -153,17 +154,20 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             
             {/* Sidebar Toggle for Desktop */}
             <button
-              className="hidden lg:block p-2 rounded-md text-gray-500"
+              className="hidden lg:block p-2 rounded-md text-muted-foreground"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               <Menu className="h-6 w-6" />
             </button>
             
-            <h2 className="text-xl font-semibold text-gray-800 lg:hidden">
+            <h2 className="text-xl font-semibold text-foreground lg:hidden">
               Clovera Admin
             </h2>
             
             <div className="flex items-center space-x-4">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+              
               {/* Notifications */}
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
